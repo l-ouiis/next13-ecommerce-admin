@@ -18,6 +18,7 @@ model Store {
   sizes           Size[]     @relation("StoreToSize")
   colors          Color[]     @relation("StoreToColor")
   orders          Order[]     @relation("StoreToOrder")
+  sides           Side[]     @relation("StoreToSide")
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
 }
@@ -43,6 +44,8 @@ model Category {
   billboard   Billboard   @relation(fields: [billboardId], references: [id])
   name        String
   products    Product[]   @relation("CategoryToProduct")
+  sides       Side[]      @relation("CategoryToSide")
+
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
 
@@ -101,6 +104,21 @@ model OrderItem {
   @@index([productId])
 }
 
+model Side {
+  id          String    @id @default(uuid())
+  storeId     String    // Foreign Key to Store
+  store       Store     @relation("StoreToSide", fields: [storeId], references: [id])
+  categoryId  String    // Foreign Key to Category
+  category    Category  @relation("CategoryToSide", fields: [categoryId], references: [id])
+  name        String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([storeId])
+  @@index([categoryId])
+}
+
+
 model Size {
   id          String    @id @default(uuid())
   storeId     String    // Foreign Key to Store
@@ -113,6 +131,8 @@ model Size {
 
   @@index([storeId])
 }
+
+
 
 model Color {
   id          String   @id @default(uuid())
