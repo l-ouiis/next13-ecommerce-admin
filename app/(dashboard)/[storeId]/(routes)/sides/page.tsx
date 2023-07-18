@@ -2,7 +2,7 @@ import { format } from "date-fns";
 
 import prismadb from "@/lib/prismadb";
 
-import { SizeColumn } from "./components/columns"
+import { SideColumn } from "./components/columns"
 import { SizesClient } from "./components/client";
 
 const SizesPage = async ({
@@ -10,7 +10,7 @@ const SizesPage = async ({
 }: {
   params: { storeId: string }
 }) => {
-  const sizes = await prismadb.size.findMany({
+  const sides = await prismadb.side.findMany({
     where: {
       storeId: params.storeId
     },
@@ -19,7 +19,7 @@ const SizesPage = async ({
     }
   });
 
-  const formattedSizes: SizeColumn[] = sizes.map((item) => ({
+  const formattedSizes: SideColumn[] = sides.map((item) => ({
     id: item.id,
     name: item.name,
     value: item.value,

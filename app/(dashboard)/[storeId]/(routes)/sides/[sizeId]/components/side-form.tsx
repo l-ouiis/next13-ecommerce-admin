@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 import { Trash } from "lucide-react"
-import { Size } from "@prisma/client"
+import { Side } from "@prisma/client"
 import { useParams, useRouter } from "next/navigation"
 
 import { Input } from "@/components/ui/input"
@@ -29,13 +29,13 @@ const formSchema = z.object({
   value: z.string().min(1),
 });
 
-type SizeFormValues = z.infer<typeof formSchema>
+type SideFormValues = z.infer<typeof formSchema>
 
-interface SizeFormProps {
-  initialData: Size | null;
+interface SideFormProps {
+  initialData: Side | null;
 };
 
-export const SizeForm: React.FC<SizeFormProps> = ({
+export const SideForm: React.FC<SideFormProps> = ({
   initialData
 }) => {
   const params = useParams();
@@ -44,28 +44,28 @@ export const SizeForm: React.FC<SizeFormProps> = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const title = initialData ? 'Edit size' : 'Create size';
-  const description = initialData ? 'Edit a size.' : 'Add a new size';
+  const title = initialData ? 'Edit side' : 'Create side';
+  const description = initialData ? 'Edit a side.' : 'Add a new side';
   const toastMessage = initialData ? 'Size updated.' : 'Size created.';
   const action = initialData ? 'Save changes' : 'Create';
 
-  const form = useForm<SizeFormValues>({
+  const form = useForm<SideFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
       name: ''
     }
   });
 
-  const onSubmit = async (data: SizeFormValues) => {
+  const onSubmit = async (data: SideFormValues) => {
     try {
       setLoading(true);
       if (initialData) {
-        await axios.patch(`/api/${params.storeId}/sizes/${params.sizeId}`, data);
+        await axios.patch(`/api/${params.storeId}/sides/${params.sizeId}`, data);
       } else {
-        await axios.post(`/api/${params.storeId}/sizes`, data);
+        await axios.post(`/api/${params.storeId}/sides`, data);
       }
       router.refresh();
-      router.push(`/${params.storeId}/sizes`);
+      router.push(`/${params.storeId}/sides`);
       toast.success(toastMessage);
     } catch (error: any) {
       toast.error('Something went wrong.');
@@ -77,12 +77,12 @@ export const SizeForm: React.FC<SizeFormProps> = ({
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`);
+      await axios.delete(`/api/${params.storeId}/sides/${params.sizeId}`);
       router.refresh();
-      router.push(`/${params.storeId}/sizes`);
-      toast.success('Size deleted.');
+      router.push(`/${params.storeId}/sides`);
+      toast.success('Side deleted.');
     } catch (error: any) {
-      toast.error('Make sure you removed all products using this size first.');
+      toast.error('Make sure you removed all products using this side first.');
     } finally {
       setLoading(false);
       setOpen(false);
@@ -134,7 +134,7 @@ export const SizeForm: React.FC<SizeFormProps> = ({
                 <FormItem>
                   <FormLabel>Value</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} placeholder="Size value" {...field} />
+                    <Input disabled={loading} placeholder="Side value" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

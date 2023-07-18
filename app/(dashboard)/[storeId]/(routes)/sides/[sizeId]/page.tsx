@@ -1,25 +1,25 @@
 import prismadb from "@/lib/prismadb";
 
-import { SizeForm } from "./components/size-form";
+import { SideForm } from "./components/side-form";
 
-const SizePage = async ({
+const SidePage = async ({
   params
 }: {
-  params: { sizeId: string }
+  params: { sideId: string }
 }) => {
-  const size = await prismadb.size.findUnique({
+  const side = await prismadb.side.findUnique({
     where: {
-      id: params.sizeId
+      id: params.sideId
     }
   });
 
   return ( 
     <div className="flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
-        <SizeForm initialData={size} />
+        <SideForm initialData={side} />
       </div>
     </div>
   );
 }
 
-export default SizePage;
+export default SidePage;
