@@ -12,7 +12,7 @@ export async function POST(
 
     const body = await req.json();
 
-    const { name, price, categoryId, colorId, sizeId, images, isFeatured, isArchived } = body;
+    const { name, price, categoryId, colorId, sideId, images, isFeatured, isArchived } = body;
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 403 });
@@ -38,8 +38,8 @@ export async function POST(
       return new NextResponse("Color id is required", { status: 400 });
     }
 
-    if (!sizeId) {
-      return new NextResponse("Size id is required", { status: 400 });
+    if (!sideId) {
+      return new NextResponse("Side id is required", { status: 400 });
     }
 
     if (!params.storeId) {
@@ -65,7 +65,7 @@ export async function POST(
         isArchived,
         categoryId,
         colorId,
-        sizeId,
+        sideId,
         storeId: params.storeId,
         images: {
           createMany: {
@@ -92,7 +92,7 @@ export async function GET(
     const { searchParams } = new URL(req.url)
     const categoryId = searchParams.get('categoryId') || undefined;
     const colorId = searchParams.get('colorId') || undefined;
-    const sizeId = searchParams.get('sizeId') || undefined;
+    const sideId = searchParams.get('sideId') || undefined;
     const isFeatured = searchParams.get('isFeatured');
 
     if (!params.storeId) {
@@ -104,7 +104,7 @@ export async function GET(
         storeId: params.storeId,
         categoryId,
         colorId,
-        sizeId,
+        sideId,
         isFeatured: isFeatured ? true : undefined,
         isArchived: false,
       },
@@ -112,7 +112,7 @@ export async function GET(
         images: true,
         category: true,
         color: true,
-        size: true,
+        side: true,
       },
       orderBy: {
         createdAt: 'desc',

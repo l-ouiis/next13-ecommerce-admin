@@ -15,7 +15,7 @@ model Store {
   billboards      Billboard[] @relation("StoreToBillboard")
   categories      Category[] @relation("StoreToCategory")
   products        Product[]  @relation("StoreToProduct")
-//  sides           Side[]     @relation("StoreToSide")
+  sides           Side[]     @relation("StoreToSide")
   orders          Order[]    @relation("StoreToOrder")
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
@@ -59,8 +59,8 @@ model Product {
   price       Decimal
   isFeatured  Boolean   @default(false)
   isArchived  Boolean   @default(false)
-//  drinks      Drink[]   @relation("ProductToDrink")
-//  sides       Side[]    @relation("ProductToSide")
+  drinks      Drink[]   @relation("ProductToDrink")
+  sides       Side[]    @relation("ProductToSide")
   images      Image[]   // Relation to Image model
   orderItems  OrderItem[]   // Relation to Order model
   createdAt   DateTime  @default(now())
@@ -96,25 +96,25 @@ model OrderItem {
   @@index([productId])
 }
 
-//model Drink {
-//  id        String   @id @default(uuid())
-//  name      String
-//  price     Decimal
-//  products  Product[] @relation("ProductToDrink")
-//  createdAt DateTime @default(now())
-//  updatedAt DateTime @updatedAt
-//}
+model Drink {
+  id        String   @id @default(uuid())
+  name      String
+  price     Decimal
+  products  Product[] @relation("ProductToDrink")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-//model Side {
-//  id        String   @id @default(uuid())
-//  storeId   String    // Foreign Key to Store
-//  store     Store     @relation("StoreToSide", fields: [storeId], references: [id])
-//  name      String
-//  value     String
-//  products  Product[] @relation("ProductToSide")
-//  createdAt DateTime @default(now())
-//  updatedAt DateTime @updatedAt
-//}
+model Side {
+  id        String   @id @default(uuid())
+  storeId   String    // Foreign Key to Store
+  store     Store     @relation("StoreToSide", fields: [storeId], references: [id])
+  name      String
+  value     String
+  products  Product[] @relation("ProductToSide")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
 model Image {
   id        String   @id @default(uuid())

@@ -28,6 +28,7 @@ export function MainNav({
       label: 'Categories',
       active: pathname === `/${params.storeId}/categories`,
     },
+    /*
     {
       href: `/${params.storeId}/sides`,
       label: 'Sides',
@@ -38,6 +39,7 @@ export function MainNav({
       label: 'Drinks',
       active: pathname === `/${params.storeId}/drinks`,
     },
+    */
     {
       href: `/${params.storeId}/products`,
       label: 'Products',
