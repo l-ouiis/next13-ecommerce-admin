@@ -52,7 +52,8 @@ export const SideForm: React.FC<SideFormProps> = ({
   const form = useForm<SideFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: initialData || {
-      name: ''
+      name: '',
+      value: ''
     }
   });
 
@@ -121,7 +122,7 @@ export const SideForm: React.FC<SideFormProps> = ({
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input disabled={loading} placeholder="Size name" {...field} />
+                    <Input disabled={loading} placeholder="Side name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

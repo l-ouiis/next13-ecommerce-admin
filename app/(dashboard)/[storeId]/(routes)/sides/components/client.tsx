@@ -15,7 +15,7 @@ interface SidesClientProps {
   data: SideColumn[];
 }
 
-export const SizesClient: React.FC<SidesClientProps> = ({
+export const SidesClient: React.FC<SidesClientProps> = ({
   data
 }) => {
   const params = useParams();
