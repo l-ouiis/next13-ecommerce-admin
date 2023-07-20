@@ -19,7 +19,7 @@ export async function GET(
       include: {
         images: true,
         category: true,
-        sie: true,
+        size: true,
         color: true,
       }
     });

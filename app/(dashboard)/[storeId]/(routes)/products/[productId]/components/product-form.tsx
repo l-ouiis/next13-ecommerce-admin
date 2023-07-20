@@ -33,8 +33,8 @@ const formSchema = z.object({
   images: z.object({ url: z.string() }).array(),
   price: z.coerce.number().min(1),
   categoryId: z.string().min(1),
-  //colorId: z.string().min(1),
-  //sizeId: z.string().min(1),
+  colorId: z.string().min(1),
+  sizeId: z.string().min(1),
   isFeatured: z.boolean().default(false).optional(),
   isArchived: z.boolean().default(false).optional()
 });
@@ -46,15 +46,15 @@ interface ProductFormProps {
     images: Image[]
   } | null;
   categories: Category[];
-  //colors: Color[];
-  //sizes: Size[];
+  colors: Color[];
+  sizes: Size[];
 };
 
 export const ProductForm: React.FC<ProductFormProps> = ({
   initialData,
   categories,
-  //sizes,
-  //colors
+  sizes,
+  colors
 }) => {
   const params = useParams();
   const router = useRouter();
@@ -75,8 +75,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
     images: [],
     price: 0,
     categoryId: '',
-    //colorId: '',
-    //sizeId: '',
+    colorId: '',
+    sizeId: '',
     isFeatured: false,
     isArchived: false,
   }
@@ -210,7 +210,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 </FormItem>
               )}
             />
-            {/* 
             <FormField
               control={form.control}
               name="sizeId"
@@ -255,7 +254,6 @@ export const ProductForm: React.FC<ProductFormProps> = ({
                 </FormItem>
               )}
             />
-            */}
             <FormField
               control={form.control}
               name="isFeatured"
