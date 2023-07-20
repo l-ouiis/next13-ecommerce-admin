@@ -28,12 +28,12 @@ export function MainNav({
       label: 'Categories',
       active: pathname === `/${params.storeId}/categories`,
     },
+    /*
     {
       href: `/${params.storeId}/sides`,
       label: 'Sides',
       active: pathname === `/${params.storeId}/sides`,
     },
-    /*
     {
       href: `/${params.storeId}/drinks`,
       label: 'Drinks',
